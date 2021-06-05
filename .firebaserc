@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "angular-blog-062021"
+  },
+  "targets": {
+    "angular-blog-062021": {
+      "hosting": {
+        "an-blog": [
+          "angular-blog-062021"
+        ]
+      }
+    }
+  }
+}
