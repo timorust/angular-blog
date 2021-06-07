@@ -7,7 +7,7 @@
 <ng-container *ngIf="comments">
   <h4>{{comments.length}} Comments</h4>
 
-  <form (ngSubmit)="sendComment()" [formControl]="commentForm">
+  <form (ngSubmit)="sendComment()" [formGroup]="commentForm">
 
     <label for="comment">Please write your option!</label>
     <textarea [formControl]="content" name="comment" id="comment" cols="30" rows="10"></textarea>
