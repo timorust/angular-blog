@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {PostInterface} from "../../interfaces/post.interface";
 import {CoreService} from "../../services/core.service";
 import {UserInterface} from "../../interfaces/user.interface";
@@ -9,35 +9,35 @@ import {AuthService} from "../../services/auth.service";
   templateUrl: './blog-page.component.html',
   styleUrls: ['./blog-page.component.scss']
 })
-export class BlogPageComponent implements OnInit {
+export class BlogPageComponent implements OnInit, OnDestroy {
 
 
-  blogPosts: PostInterface[];
+  blog: PostInterface[];
+  blogSub;
 
   user: UserInterface;
   userSub;
+
   constructor(private coreService: CoreService,
               private authS: AuthService) { }
 
   ngOnInit(): void {
     this.userSub = this.authS.user.subscribe((user: UserInterface) => {
       this.user = user;
-      this.getBlogPost();
     });
-
+    this.getBlog();
   }
 
-  getBlogPost() {
-    this.coreService.getBlogPosts().subscribe((blogPosts: PostInterface[]) => {
-      this.blogPosts = blogPosts;
+  ngOnDestroy() {
+    if(this.userSub) this.userSub.unsubscribe();
+    if(this.blogSub) this.blogSub.unsubscribe();
+  }
 
-      blogPosts.forEach(blogItem => {
-        blogItem.userId = this.user.uid;
-        this.coreService.copyData(blogItem).then(() => {
+  getBlog() {
+    this.blogSub = this.coreService.getBlog().subscribe((blog: PostInterface[]) => {
 
-        })
-
-      })
+      console.log(blog);
+     this.blog = blog;
     })
   }
 

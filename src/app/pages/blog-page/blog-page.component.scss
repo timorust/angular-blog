@@ -1,0 +1,31 @@
+ul {
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.2rem;
+
+  li {
+    padding: .6rem;
+    list-style: none;
+    box-shadow: 0 0 5px 0 rgba(0,0,0,0);
+    transition: box-shadow 300ms;
+
+    &:hover {
+      box-shadow: 0 0 20px rgba(0,0,0, .3);
+    }
+
+    button {
+      border: 0;
+      outline: none;
+      padding: .2rem .6rem;
+      font-size: 1rem;
+      background: #039be5;
+      cursor: pointer;
+      border-radius: 4px;
+
+      &:hover {
+        background: #086ba5;
+      }
+    }
+  }
+}

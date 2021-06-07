@@ -1,19 +1,41 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
 import {AngularFirestore} from "@angular/fire/firestore";
+import {CommentInterface} from "../interfaces/comment.interface";
+import firebase from "firebase";
+import firestore = firebase.firestore;
 
 @Injectable({
   providedIn: 'root'
 })
 export class CoreService {
 
-  constructor(private httpClient: HttpClient,
-              private anf: AngularFirestore) { }
+  constructor( private afs: AngularFirestore) { }
 
-  getBlogPosts() {
-    return this.httpClient.get(`https://jsonplaceholder.typicode.com/posts`);
+  getBlog(): any {
+    return this.afs.collection(`posts`).valueChanges();
   }
-  copyData(blogItem) {
-    return this.anf.doc(`posts/${blogItem.id}`).set({...blogItem});
+
+  getPost(postId: string): any {
+    return this.afs.doc(`posts/${postId}`).valueChanges({idField: 'id'});
+  }
+
+  getComments(postId: string) {
+    return this.afs.doc(`comments/${postId}`).valueChanges();
+  }
+
+  createCommentDocs(postId: string) {
+    return this.afs.doc(`comments/${postId}`).set({comments: []});
+  }
+
+  saveComment(postId, comment: CommentInterface) {
+    return this.afs.doc(`comments/${postId}`).update({
+      [`comments`]: firestore.FieldValue.arrayUnion(comment)
+    })
+  }
+
+  deleteComment(postId, comment: CommentInterface) {
+    return this.afs.doc(`comments/${postId}`).update({
+      [`comments`]: firestore.FieldValue.arrayRemove(comment)
+    });
   }
 }

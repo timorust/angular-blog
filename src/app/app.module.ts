@@ -7,7 +7,7 @@ import { environment } from "../environments/environment"
 import {AngularFireModule}  from '@angular/fire';
 import { PostPageComponent } from './pages/post-page/post-page.component';
 import { CommentsComponent } from './components/comments/comments.component';
-import {HttpClientModule} from "@angular/common/http";
+
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { BlogPageComponent } from './pages/blog-page/blog-page.component';
 import {AngularFireAuthModule} from "@angular/fire/auth";
@@ -28,7 +28,6 @@ import {AngularFirestoreModule} from "@angular/fire/firestore";
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
-    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     AngularFireAuthModule,

@@ -1,1 +1,7 @@
-<pre>{{blogPosts | json}}</pre>
+<ul>
+  <li *ngFor="let post of blog;">
+    <h4>{{post.title}}</h4>
+    <p>{{post.body.slice(0, 130)}}...</p>
+    <button routerLink="/post/{{post.id}}">Read More</button>
+  </li>
+</ul>

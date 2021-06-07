@@ -11,7 +11,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'post/:postId',
+    path: 'post/:postID',
     component: PostPageComponent
   }
 ];
