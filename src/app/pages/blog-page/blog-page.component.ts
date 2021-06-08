@@ -35,9 +35,7 @@ export class BlogPageComponent implements OnInit, OnDestroy {
 
   getBlog() {
     this.blogSub = this.coreService.getBlog().subscribe((blog: PostInterface[]) => {
-
-      console.log(blog);
-     this.blog = blog;
+      this.blog = blog;
     })
   }
 

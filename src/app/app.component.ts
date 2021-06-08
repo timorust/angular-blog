@@ -23,18 +23,22 @@ export class AppComponent implements OnInit {
     if(this.userSub) this.userSub.unsubscribe();
     this.userSub = this.authService.user
       .subscribe(async (userDoc: UserInterface | undefined | null) => {
-      if(userDoc === undefined) {
-        await this.authService.createUserDoc(auth)
-      }
-      else {
-        this.userApp = userDoc;
-      }
-    })
+        if(userDoc === undefined) {
+          await this.authService.createUserDoc(auth)
+        }
+        else {
+          this.userApp = userDoc;
+        }
+      })
   }
 
   register() {
     this.authService.signInWithGoogle().then(auth => {
       this.getUser(auth.user);
     })
+  }
+
+  logOut() {
+    return this.authService.logOut();
   }
 }

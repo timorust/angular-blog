@@ -12,6 +12,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { BlogPageComponent } from './pages/blog-page/blog-page.component';
 import {AngularFireAuthModule} from "@angular/fire/auth";
 import {AngularFirestoreModule} from "@angular/fire/firestore";
+import {HttpClientModule} from "@angular/common/http";
 
 
 
@@ -31,7 +32,8 @@ import {AngularFirestoreModule} from "@angular/fire/firestore";
     FormsModule,
     ReactiveFormsModule,
     AngularFireAuthModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

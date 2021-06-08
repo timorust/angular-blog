@@ -2,7 +2,7 @@
   <h1>The AN-Blog</h1>
 
   <button *ngIf="!userApp" (click)="register()">Log in to view content </button>
-
+  <button *ngIf="userApp" (click)="logOut()">Log Out </button>
   <router-outlet *ngIf="userApp"></router-outlet>
 </div>
 

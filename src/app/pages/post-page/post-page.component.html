@@ -4,21 +4,4 @@
   <p [innerText]="post.body"></p>
 </ng-container>
 
-<ng-container *ngIf="comments">
-  <h4>{{comments.length}} Comments</h4>
-
-  <form (ngSubmit)="sendComment()" [formGroup]="commentForm">
-
-    <label for="comment">Please write your option!</label>
-    <textarea [formControl]="content" name="comment" id="comment" cols="30" rows="10"></textarea>
-    <button type="submit">Submit</button>
-  </form>
-
-  <div class="comment" *ngFor="let item of comments">
-    <h5>{{item.displayName}}</h5>
-    <img [src]="item.photoURL" [alt]="item.displayName">
-    <p>{{item.comments}}</p>
-    <p>Create At is =>{{item.createdAt | date}}</p>
-  </div>
-
-</ng-container>
+<ab-comments [postId]="postId"></ab-comments>

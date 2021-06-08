@@ -1,4 +1,4 @@
-export interface CommentDocInterface {
+export interface CommentsDocInterface {
   comments: CommentInterface[];
 }
 
@@ -6,8 +6,7 @@ export interface CommentInterface {
   uid: string;
   displayName: string;
   createdAt: any;
-  title: string;
-  comments: string;
+  comment: string;
   photoURL: string;
 }
 
