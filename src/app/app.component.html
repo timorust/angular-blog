@@ -3,6 +3,6 @@
 
   <button *ngIf="!userApp" (click)="register()">Log in to view content </button>
   <button *ngIf="userApp" (click)="logOut()">Log Out </button>
-  <router-outlet *ngIf="userApp"></router-outlet>
+  <router-outlet></router-outlet>
 </div>
 

@@ -1,0 +1,25 @@
+<form (ngSubmit)="saveNewPost()" [formGroup]="addPostForm">
+
+  <div>
+    <label for="title">Post Title:</label>
+    <input autocomplete="off" [formControl]="getTitle" id="title" type="text">
+    <span *ngIf="getTitle.invalid && getTitle.dirty && getTitle.touched">Title is => required</span>
+  </div>
+
+  <div>
+    <label for="body">Post Body:</label>
+    <textarea [formControl]="getBody" name="body" id="body" cols="30" rows="10"></textarea>
+    <span>Max is => 500</span>
+    <pre>{{getBody.errors | json}}</pre>
+
+    <span *ngIf="getBody.errors.required && getBody.touched && getBody.dirty">Body is => required</span>
+    <span *ngIf="getBody.errors.maxlength && getBody.touched && getBody.dirty">
+      Max Length is => {{getBody.errors.maxlength.requiredLength}} ({{getBody.errors.maxlength.actualLength}})
+    </span>
+  </div>
+
+
+  <button type="submit">Save New Post</button>
+</form>
+
+
