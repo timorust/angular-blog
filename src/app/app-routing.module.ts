@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {BlogPageComponent} from "./pages/blog-page/blog-page.component";
 import {PostPageComponent} from "./pages/post-page/post-page.component";
 import {AddPageComponent} from "./pages/add-page/add-page.component";
+import {UserGuard} from "./guards/user.guard";
 
 const routes: Routes = [
   {
@@ -17,7 +18,7 @@ const routes: Routes = [
   {
     path: 'add',
     component: AddPageComponent,
-
+    canActivate: [UserGuard]
   }
 
 

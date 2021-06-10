@@ -1,4 +1,4 @@
-<form (ngSubmit)="saveNewPost()" [formGroup]="addPostForm">
+<form (ngSubmit)="saveNewPost()" [formGroup]="addPostForm" *ngIf="user">
 
   <div>
     <label for="title">Post Title:</label>
@@ -8,16 +8,11 @@
 
   <div>
     <label for="body">Post Body:</label>
-    <textarea [formControl]="getBody" name="body" id="body" cols="30" rows="10"></textarea>
-    <span>Max is => 500</span>
-    <pre>{{getBody.errors | json}}</pre>
+    <textarea maxlength="500" [formControl]="getBody" name="body" id="body" cols="30" rows="10"></textarea>
+    <span>Max is =>{{getBody.value?.length }}/500</span>
 
-    <span *ngIf="getBody.errors.required && getBody.touched && getBody.dirty">Body is => required</span>
-    <span *ngIf="getBody.errors.maxlength && getBody.touched && getBody.dirty">
-      Max Length is => {{getBody.errors.maxlength.requiredLength}} ({{getBody.errors.maxlength.actualLength}})
-    </span>
+    <span *ngIf="getBody.errors?.required && getBody.touched && getBody.dirty">Body is => required</span>
   </div>
-
 
   <button type="submit">Save New Post</button>
 </form>
