@@ -12,8 +12,12 @@ export class CoreService {
 
   constructor( private afs: AngularFirestore) { }
 
+  removePostById(postId: string) {
+    return this.afs.doc(`posts/${postId}`).delete();
+  }
+
   getBlog(): any {
-    return this.afs.collection(`posts`).valueChanges();
+    return this.afs.collection(`posts`).valueChanges({idField: 'id'});
   }
 
   savePost(post: PostInterface) {

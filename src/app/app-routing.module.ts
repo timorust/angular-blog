@@ -3,7 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 import {BlogPageComponent} from "./pages/blog-page/blog-page.component";
 import {PostPageComponent} from "./pages/post-page/post-page.component";
 import {AddPageComponent} from "./pages/add-page/add-page.component";
-import {UserGuard} from "./guards/user.guard";
+import {AngularFireAuthGuard, redirectUnauthorizedTo} from "@angular/fire/auth-guard";
+
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['/']);
 
 const routes: Routes = [
   {
@@ -18,7 +20,8 @@ const routes: Routes = [
   {
     path: 'add',
     component: AddPageComponent,
-    canActivate: [UserGuard]
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin }
   }
 
 
