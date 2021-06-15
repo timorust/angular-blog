@@ -45,6 +45,7 @@ export class AddPageComponent implements OnInit {
       title: this.getTitle.value,
       body: this.getBody.value,
       comments: [],
+      score: this.getBody.value,
       createdAt: Date.now()
     }).then(() => {
       this.addPostForm.reset();

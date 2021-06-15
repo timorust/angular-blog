@@ -74,7 +74,6 @@ export class CommentsComponent implements OnInit, OnDestroy {
       displayName: this.user.displayName,
       photoURL: this.user.photoURL
     }
-    console.log(commentRecord)
     await this.coreService.saveComment(this.postId, commentRecord);
     this.commentForm.reset();
   }

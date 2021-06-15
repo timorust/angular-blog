@@ -38,9 +38,18 @@ export class CoreService {
   }
 
   saveComment(postId, comment: CommentInterface) {
-    return this.afs.doc(`comments/${postId}`).update({
+
+    const postScore = this.afs.doc(`comments/${postId}`).update({
+      [`score`]: firestore.FieldValue.increment(1)
+    })
+
+    const context = this.afs.doc(`comments/${postId}`).update({
       [`comments`]: firestore.FieldValue.arrayUnion(comment)
     })
+    const contextRecorder = this.afs.doc(`users/${comment.uid}`).update({
+      [`postRanked`]: firestore.FieldValue.arrayUnion(postId)
+    })
+    return Promise.all([postScore,context, contextRecorder]);
   }
 
   deleteComment(postId, comment: CommentInterface) {
