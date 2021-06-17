@@ -3,11 +3,10 @@
 </ng-container>
 
 <form (ngSubmit)="sendComment()" [formGroup]="commentForm" *ngIf="user">
-
   <label for="comment">Please write your option!</label>
-
   <textarea [formControl]="content" name="comment" id="comment" cols="30" rows="10"></textarea>
   <button type="submit">Submit</button>
+
 </form>
 
 <div class="comment" *ngFor="let item of comments">

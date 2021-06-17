@@ -11,13 +11,13 @@ service cloud.firestore {
     match /posts/{postId} {
       allow read;
       allow create: if isSigneIn() && isNotExist();
-      allow update: if isSigneIn() && (request.auth.uid == resource.data.userId) || (userRank(postId));
+      allow update: if isSigneIn() && (request.auth.uid == resource.data.userId || scoreChange(postId));
       allow delete: if isSigneIn() && request.auth.uid == resource.data.userId;
     }
 
     match /comments/{postId} {
-      allow read;
-      allow create: if isSigneIn();
+      allow get;
+      allow create: if isSigneIn() && isNotExist();
       allow update: if isSigneIn();
     }
 
@@ -30,7 +30,7 @@ service cloud.firestore {
       return resource == null;
     }
 
-    function userRank(postId) {
+    function scoreChange(postId) {
       return request.writeFields.size() == 1 && ('score' in request.writeFirelds)
              && !(postId in (get(/databases/$(database)/documents/users/$(request.auth.uid)).data).postRanked);
     }

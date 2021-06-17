@@ -11,7 +11,7 @@ import firebase from "firebase";
 })
 export class AuthService {
 
-  user: Observable<UserInterface | undefined | null>;
+  user: Observable<UserInterface | undefined | null> | null;
 
   constructor(private afAuth: AngularFireAuth,
               private afs: AngularFirestore) {

@@ -53,9 +53,16 @@ export class PostPageComponent implements OnInit, OnDestroy {
   }
 
   removeThisPost() {
-    this.coreService.removePostById(this.postId).then(() => {
+    this.coreService.removePostById(this.postId).then(async () => {
       alert('Delete Successfully!');
-      return this.router.navigateByUrl('/');
+      await this.router.navigateByUrl('/');
     });
+  }
+
+
+  toggleVote() {
+    this.coreService.togglePostScore(this.postId).then(() => {
+      alert('Voted Successfully');
+    })
   }
 }

@@ -7,5 +7,5 @@ export interface PostInterface {
   score: number;
   body: string;
   comments: CommentInterface[];
-  createdAt: number;
+  createdAt: any;
 }

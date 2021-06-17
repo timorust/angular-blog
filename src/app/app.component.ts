@@ -8,9 +8,8 @@ import {UserInterface} from "./interfaces/user.interface";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'an-blog';
 
-  userApp: UserInterface;
+  userApp: UserInterface | null;
   userSub;
   constructor(private authService: AuthService) {
   }
