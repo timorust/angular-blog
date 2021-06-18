@@ -15,5 +15,5 @@
   <p>{{item.comment}}</p>
   <p>Create At is =>{{item.createdAt | date}}</p>
 
-  <button *ngIf="user.uid === item.uid" (click)="deleteComment(item)">Delete</button>
+  <button *ngIf="user?.uid === item.uid" (click)="deleteComment(item)">Delete</button>
 </div>

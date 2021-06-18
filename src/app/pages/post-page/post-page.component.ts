@@ -61,7 +61,7 @@ export class PostPageComponent implements OnInit, OnDestroy {
 
 
   toggleVote() {
-    this.coreService.togglePostScore(this.postId).then(() => {
+    this.coreService.togglePostScore(this.postId, this.user.uid).then(() => {
       alert('Voted Successfully');
     })
   }

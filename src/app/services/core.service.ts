@@ -49,9 +49,14 @@ export class CoreService {
     });
   }
 
-  togglePostScore(postId) {
-    return this.afs.doc(`posts/${postId}`).update({
+  togglePostScore(postId: string, userId: string) {
+    const updatePost = this.afs.doc(`posts/${postId}`).update({
       [`score`]: firestore.FieldValue.increment(1)
+    });
+
+    const updateUserDoc = this.afs.doc(`users/${userId}`).update({
+      [`voted`]: firestore.FieldValue.arrayUnion(postId)
     })
+    return Promise.all([updatePost, updateUserDoc]);
   }
 }
