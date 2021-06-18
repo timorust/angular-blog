@@ -5,13 +5,13 @@ service cloud.firestore {
     match /users/{userId} {
       allow get;
       allow create: if isSigneIn() && isNotExist();
-      allow update: if request.auth.uid == userId && !('voted' in request.writeFields);
+      allow update: if request.auth.uid == userId;
     }
 
     match /posts/{postId} {
       allow read;
       allow create: if isSigneIn() && isNotExist();
-      allow update: if isSigneIn() && isScoreChange(postId);
+      allow update: if isSigneIn() && (isUpVote(postId) || isDownVote(postId));
       allow delete: if isSigneIn() && request.auth.uid == resource.data.userId;
     }
 
@@ -30,8 +30,16 @@ service cloud.firestore {
       return resource == null;
     }
 
-    function isScoreChange(postId) {
-      return request.writeFields.size() == 1 && 'score' in request.writeFields &&
+    function isUpVote(postId) {
+      return request.writeFields.size() == 1 &&
+             'score' in request.writeFields &&
+             (postId in (get(/databases/$(database)/documents/users/$(request.auth.uid)).data).voted);
+
+    }
+
+    function isDownVote(postId) {
+      return request.writeFields.size() == 1 &&
+             'score' in request.writeFields &&
              !(postId in (get(/databases/$(database)/documents/users/$(request.auth.uid)).data).voted);
 
     }

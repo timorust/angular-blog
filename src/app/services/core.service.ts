@@ -49,13 +49,26 @@ export class CoreService {
     });
   }
 
-  togglePostScore(postId: string, userId: string) {
+
+  voteUppPostScore(postId: string, userId: string) {
     const updatePost = this.afs.doc(`posts/${postId}`).update({
       [`score`]: firestore.FieldValue.increment(1)
     });
 
     const updateUserDoc = this.afs.doc(`users/${userId}`).update({
       [`voted`]: firestore.FieldValue.arrayUnion(postId)
+    })
+    return Promise.all([updatePost, updateUserDoc]);
+  }
+
+
+  voteDownPostScore(postId: string, userId: string) {
+    const updatePost = this.afs.doc(`posts/${postId}`).update({
+      [`score`]: firestore.FieldValue.increment(-1)
+    });
+
+    const updateUserDoc = this.afs.doc(`users/${userId}`).update({
+      [`voted`]: firestore.FieldValue.arrayRemove(postId)
     })
     return Promise.all([updatePost, updateUserDoc]);
   }

@@ -2,7 +2,10 @@
 <ng-container *ngIf="post">
   <h2 [innerText]="post.title"></h2>
   <h3>Score is =>{{ post.score }}</h3>
-  <button (click)="toggleVote()">Vote</button>
+  <button (click)="toggleVote()">
+    <ng-container *ngIf="isUserVoted">Down Vote</ng-container>
+    <ng-container *ngIf="!isUserVoted">Up Vote</ng-container>
+  </button>
   <p [innerText]="post.body"></p>
 </ng-container>
 

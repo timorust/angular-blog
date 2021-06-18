@@ -22,6 +22,8 @@ export class PostPageComponent implements OnInit, OnDestroy {
   user: UserInterface;
   userSub;
 
+  isUserVoted: boolean;
+
   constructor(private coreService: CoreService,
               private activatedRoute: ActivatedRoute,
               private router: Router,
@@ -39,6 +41,7 @@ export class PostPageComponent implements OnInit, OnDestroy {
   getUser() {
     this.userSub = this.authService.user.subscribe((userDoc: UserInterface) => {
       this.user = userDoc;
+      this.isUserVoted = userDoc.voted.includes(this.postId);
     })
   }
 
@@ -61,8 +64,17 @@ export class PostPageComponent implements OnInit, OnDestroy {
 
 
   toggleVote() {
-    this.coreService.togglePostScore(this.postId, this.user.uid).then(() => {
-      alert('Voted Successfully');
-    })
+
+    if(this.isUserVoted) {
+      this.coreService.voteDownPostScore(this.postId, this.user.uid).then(() => {
+        alert('Down Successfully');
+      })
+    }
+    else {
+      this.coreService.voteUppPostScore(this.postId, this.user.uid).then(() => {
+        alert('Upp Successfully');
+      })
+    }
+
   }
 }
