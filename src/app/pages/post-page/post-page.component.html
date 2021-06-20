@@ -1,7 +1,9 @@
 <button routerLink="/">Go Back</button>
+<button (click)="removeThisPost()">Remove</button>
 <ng-container *ngIf="post">
   <h2 [innerText]="post.title"></h2>
   <h3>Score is =>{{ post.score }}</h3>
+
   <button (click)="toggleVote()">
     <ng-container *ngIf="isUserVoted">Down Vote</ng-container>
     <ng-container *ngIf="!isUserVoted">Up Vote</ng-container>
@@ -11,4 +13,4 @@
 
 <ab-comments [postId]="postId"></ab-comments>
 <!--<button (click)="removeThisPost()" *ngIf="post.userId === user.uid">Remove</button>-->
-<button (click)="removeThisPost()">Remove</button>
+
