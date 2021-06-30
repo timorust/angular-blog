@@ -4,4 +4,5 @@ export interface UserInterface {
   photoURL:string;
   uid:string;
   voted: string[];
+  role: string;
 }

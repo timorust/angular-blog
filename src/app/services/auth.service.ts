@@ -34,7 +34,8 @@ export class AuthService {
       email: auth.email,
       photoURL: auth.photoURL,
       uid: auth.uid,
-      voted: []
+      voted: [],
+      role: 'user'
     })
   }
 

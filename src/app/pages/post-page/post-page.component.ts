@@ -75,6 +75,12 @@ export class PostPageComponent implements OnInit, OnDestroy {
         alert('Upp Successfully');
       })
     }
+  }
 
+
+  publishPost() {
+    this.coreService.publishPost(this.postId).then(() => {
+      alert('Post Published');
+    });
   }
 }

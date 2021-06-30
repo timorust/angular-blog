@@ -42,6 +42,7 @@ export class AddPageComponent implements OnInit {
     if(this.addPostForm.invalid) {return alert('Invalid form');}
     this.coreService.savePost({
       userId: this.user.uid,
+      published: false,
       title: this.getTitle.value,
       body: this.getBody.value,
       comments: [],

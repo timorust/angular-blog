@@ -9,6 +9,8 @@
     <ng-container *ngIf="!isUserVoted">Up Vote</ng-container>
   </button>
   <p [innerText]="post.body"></p>
+
+  <button *ngIf="user.role === 'editor'" (click)="publishPost()">Published</button>
 </ng-container>
 
 <ab-comments [postId]="postId"></ab-comments>
